@@ -67,6 +67,8 @@ def add_all_arguments(parser, train):
         parser.add_argument('--no_balancing_inloss', action='store_true', default=False, help='if specified, do *not* use class balancing in the loss function')
         parser.add_argument('--no_labelmix', action='store_true', default=False, help='if specified, do *not* use LabelMix')
         parser.add_argument('--lambda_labelmix', type=float, default=10.0, help='weight for LabelMix regularization')
+
+        parser.add_argument('--with_cp', action='store_true', default=False, help='if specified, use cp')
     else:
         parser.add_argument('--results_dir', type=str, default='./results/', help='saves testing results here.')
         parser.add_argument('--ckpt_iter', type=str, default='best', help='which epoch to load to evaluate a model')
@@ -76,6 +78,9 @@ def add_all_arguments(parser, train):
 def set_dataset_default_lm(opt, parser):
     if opt.dataset_mode == "ade20k":
         parser.set_defaults(lambda_labelmix=10.0)
+        parser.set_defaults(EMA_decay=0.9999)
+    if opt.dataset_mode == "gta":
+        parser.set_defaults(lambda_labelmix=5.0)
         parser.set_defaults(EMA_decay=0.9999)
     if opt.dataset_mode == "cityscapes":
         parser.set_defaults(lr_g=0.0004)

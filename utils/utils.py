@@ -43,7 +43,7 @@ class results_saver():
 
     def save_im(self, im, mode, name):
         im = Image.fromarray(im.astype(np.uint8))
-        im.save(os.path.join(self.path_to_save[mode], name.split("/")[-1]).replace('.jpg', '.png'))
+        im.save(os.path.join(self.path_to_save[mode], name.split(os.path.sep)[-1]).replace('.jpg', '.png'))
 
 
 class timer():
