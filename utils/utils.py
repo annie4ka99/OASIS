@@ -96,6 +96,7 @@ class losses_saver():
                     self.losses[self.name_list[i]].append(self.cur_estimates[i]/self.opt.freq_smooth_loss)
                     self.cur_estimates[i] = 0
         if epoch % self.freq_save_loss == self.freq_save_loss-1:
+            print('saving losses...')
             self.plot_losses()
             np.save(os.path.join(self.opt.checkpoints_dir, self.opt.name, "losses", "losses"), self.losses)
 
