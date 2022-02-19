@@ -55,17 +55,13 @@ for epoch in range(start_epoch, opt.num_epochs):
         if not opt.no_EMA:
             utils.update_EMA(model, cur_iter, dataloader, opt)
         if cur_iter % opt.freq_print == 0:
-            print('visualizing batch...')
             im_saver.visualize_batch(model, image, label, cur_iter)
-            print('calling timer...')
             timer(epoch, cur_iter)
         if cur_iter % opt.freq_save_ckpt == 0:
             utils.save_networks(opt, cur_iter, model)
         if cur_iter % opt.freq_save_latest == 0:
-            print('saving networks...')
             utils.save_networks(opt, cur_iter, model, latest=True)
         if cur_iter % opt.freq_fid == 0 and cur_iter > 0:
-            print('computing FID...')
             is_best = fid_computer.update(model, cur_iter)
             if is_best:
                 utils.save_networks(opt, cur_iter, model, best=True)
