@@ -34,7 +34,7 @@ def add_all_arguments(parser, train):
     parser.add_argument('--batch_size', type=int, default=1, help='input batch size')
     parser.add_argument('--dataroot', type=str, default='./datasets/cityscapes/', help='path to dataset root')
     parser.add_argument('--dataset_mode', type=str, default='coco', help='this option indicates which dataset should be loaded')
-    parser.add_argument('--no_flip', action='store_true', help='if specified, do not flip the images for data argumentation')
+    parser.add_argument('--no_flip', action='store_true', help='if specified, do not flip the images for data augmentation')
 
     # for generator
     parser.add_argument('--num_res_blocks', type=int, default=6, help='number of residual blocks in G and D')
@@ -80,7 +80,7 @@ def set_dataset_default_lm(opt, parser):
         parser.set_defaults(lambda_labelmix=10.0)
         parser.set_defaults(EMA_decay=0.9999)
     if opt.dataset_mode == "gta":
-        parser.set_defaults(lambda_labelmix=5.0)
+        parser.set_defaults(lambda_labelmix=10.0)
         parser.set_defaults(EMA_decay=0.9999)
     if opt.dataset_mode == "cityscapes":
         parser.set_defaults(lr_g=0.0004)
