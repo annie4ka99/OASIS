@@ -82,6 +82,9 @@ def set_dataset_default_lm(opt, parser):
     if opt.dataset_mode == "gta":
         parser.set_defaults(lambda_labelmix=10.0)
         parser.set_defaults(EMA_decay=0.9999)
+    if opt.dataset_mode == "ade":
+        parser.set_defaults(lambda_labelmix=10.0)
+        parser.set_defaults(EMA_decay=0.9999)
     if opt.dataset_mode == "cityscapes":
         parser.set_defaults(lr_g=0.0004)
         parser.set_defaults(lambda_labelmix=5.0)

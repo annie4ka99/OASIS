@@ -46,7 +46,7 @@ class AdeDataset(torch.utils.data.Dataset):
 
     def transforms(self, image, label):
         assert image.size == label.size
-        height, width = image.shape
+        width, height = image.size
         if height > width != 512:
             new_width = 512
             new_height = int((new_width / width) * height)
