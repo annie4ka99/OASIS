@@ -29,6 +29,8 @@ optimizerD = torch.optim.Adam(model.module.netD.parameters(), lr=opt.lr_d, betas
 #--- the training loop ---#
 already_started = False
 start_epoch, start_iter = utils.get_start_iters(opt.loaded_latest_iter, len(dataloader))
+print("**", start_epoch, start_iter, "**")
+print("**", len(dataloader))
 for epoch in range(start_epoch, opt.num_epochs):
     for i, data_i in enumerate(dataloader):
         if not already_started and i < start_iter:
