@@ -14,6 +14,7 @@ class AdeDataset(torch.utils.data.Dataset):
         opt.semantic_nc = 31 # label_nc + unknown
         opt.cache_filelist_read = False
         opt.cache_filelist_write = False
+        opt.aspect_ratio = 1.0
 
         self.opt = opt
         self.for_metrics = for_metrics
