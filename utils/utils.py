@@ -80,6 +80,7 @@ class losses_saver():
                                  "losses")
         self.is_first = True
         os.makedirs(self.path, exist_ok=True)
+        os.makedirs(os.path.join(self.opt.checkpoints_dir, self.opt.name, "losses"), exist_ok=True)
         for name in self.name_list:
             if opt.continue_train and os.path.exists(self.path+"/losses.npy"):
                 self.losses[name] = np.load(self.path+"/losses.npy", allow_pickle = True).item()[name]
