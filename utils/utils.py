@@ -15,11 +15,11 @@ def fix_seed(seed):
     np.random.seed(seed)
 
 
-def get_start_iters(start_iter, dataset_size):
-    if start_iter == 0:
+def get_start_iters(opt, dataset_size):
+    if opt.loaded_latest_iter == 0 or opt.with_new_data:
         return 0, 0
-    start_epoch = (start_iter + 1) // dataset_size
-    start_iter  = (start_iter + 1) %  dataset_size
+    start_epoch = (opt.loaded_latest_iter + 1) // dataset_size
+    start_iter  = (opt.loaded_latest_iter + 1) %  dataset_size
     return start_epoch, start_iter
 
 
@@ -75,7 +75,9 @@ class losses_saver():
         self.freq_save_loss = opt.freq_save_loss
         self.losses = dict()
         self.cur_estimates = np.zeros(len(self.name_list))
-        self.path = os.path.join(self.opt.checkpoints_dir, self.opt.name, "losses")
+        self.path = os.path.join(self.opt.checkpoints_dir,
+                                 self.opt.name if self.opt.load_from is None else self.opt.load_from,
+                                 "losses")
         self.is_first = True
         os.makedirs(self.path, exist_ok=True)
         for name in self.name_list:
