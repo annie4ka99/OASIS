@@ -48,12 +48,13 @@ class AdeDataset(torch.utils.data.Dataset):
     def transforms(self, image, label):
         assert image.size == label.size
         width, height = image.size
-        if height > width != 512:
+        new_width, new_height = width, height
+        if height >= width != 512:
             new_width = 512
             new_height = int((new_width / width) * height)
             image = TR.functional.resize(image, (new_height, new_width), Image.BICUBIC)
             label = TR.functional.resize(label, (new_height, new_width), Image.NEAREST)
-        elif width > height != 512:
+        elif width >= height != 512:
             new_height = 512
             new_width = int((new_height / height) * width)
             image = TR.functional.resize(image, (new_height, new_width), Image.BICUBIC)
