@@ -11,7 +11,7 @@ def read_arguments(train=True):
     opt = parser.parse_args()
     if train:
         set_dataset_default_lm(opt, parser)
-        if opt.continue_train and not opt.with_new_data:
+        if opt.continue_train and not opt.no_load_opt:
             update_options_from_file(opt, parser)
     opt = parser.parse_args()
     opt.phase = 'train' if train else 'test'
@@ -54,9 +54,9 @@ def add_all_arguments(parser, train):
         parser.add_argument('--freq_save_loss', type=int, default=2500, help='frequency of loss plot updates')
         parser.add_argument('--freq_fid', type=int, default=5000, help='frequency of saving the fid score (in training iterations)')
         parser.add_argument('--continue_train', action='store_true', help='resume previously interrupted training')
-        parser.add_argument('--with_new_data', action='store_true', help='if specified, not load options from '
-                                                                         'previous training and start training from 0th'
-                                                                         ' epoch')
+        parser.add_argument('--no_load_opt', action='store_true', help='if specified, not load options from previous training')
+        parser.add_argument('--with_new_data', action='store_true', help='if specified start training from 0th'
+                                                                         ' epoch 0th iteration')
         parser.add_argument('--load_from', type=str, default=None, help='name of the experiment to load weights from')
         parser.add_argument('--which_iter', type=str, default='latest', help='which epoch to load when continue_train')
         parser.add_argument('--num_epochs', type=int, default=200, help='number of epochs to train')
